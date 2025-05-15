@@ -38,7 +38,20 @@ const DashboardLayout = () => {
     {
       label: "Kitchen",
       path: "/dashboard/kitchen",
-      icon: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z",
+      icon: "M8.25 3v6.75m0 0v10.5m0-10.5h-3.75m3.75 0h3.75M15.75 3v6.75m0 0v10.5m0-10.5h3.75m-3.75 0h-3.75",
+    },
+    {
+      label: "Add Menu",
+      path: "/dashboard/add-menu",
+      icon: "M4.5 3.75a.75.75 0 011.5 0v5.25a2.25 2.25 0 11-1.5 0V3.75zm3.75 0a.75.75 0 011.5 0v5.25a2.25 2.25 0 11-1.5 0V3.75zm3.75 0a.75.75 0 011.5 0v5.25A3.75 3.75 0 0110.5 12v1.5a.75.75 0 01-1.5 0V12a3.75 3.75 0 011.5-2.97V3.75zm4.5 5.25a.75.75 0 011.5 0v11.25a.75.75 0 01-1.5 0V9z"
+
+    },
+    {
+      label: "Manage Menu",
+      path: "/dashboard/manage-menu",
+      icon: "M9 2a1 1 0 00-1 1v1H5a2 2 0 00-2 2v11a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-3V3a1 1 0 00-1-1H9zm3 5h4m-4 4h4m-4 4h4m-6-8h.01M9 11h.01M9 15h.01"
+
+
     },
     {
       label: "Settings",

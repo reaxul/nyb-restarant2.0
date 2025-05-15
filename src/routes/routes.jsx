@@ -19,6 +19,8 @@ import Users from "../pages/Users";
 import PrivateRoute from "./PrivateRoute";
 import ScrollToTop from "../components/ScrollToTop";
 import Kitchen from "../pages/Kitchen";
+import AddMenu from "../pages/AddMenu";
+import ManageMenu from "../pages/ManageMenu";
 
 const router = createBrowserRouter([
   {
@@ -111,6 +113,14 @@ const router = createBrowserRouter([
       {
         path: "kitchen",
         element: <Kitchen />,
+      },
+      {
+        path: "add-menu",
+        element: <AddMenu />,
+      },
+      {
+        path: "manage-menu",
+        element: <ManageMenu />,
       }
     ],
   },

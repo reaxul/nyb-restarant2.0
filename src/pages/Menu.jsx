@@ -5,10 +5,10 @@ import FoodCard from "../components/FoodCard";
 const Menu = () => {
   const [category, setCategory] = useState("FOOD");
 
-  const filterdCategory = menu.filter(
+  const filteredCategory = menu.filter(
     (item) => item.category.toLocaleUpperCase() === category
   );
-  const filterdItems = filterdCategory[0];
+  const filteredItems = filteredCategory[0];
 
   const categories = ["FOOD", "DRINKS", "DESSERTS"];
 
@@ -31,7 +31,7 @@ const Menu = () => {
 
       {/* Food Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6   ">
-        {filterdItems?.items?.map((item, index) => (
+        {filteredItems?.items?.map((item, index) => (
           <FoodCard key={index} item={item} />
         ))}
       </div>

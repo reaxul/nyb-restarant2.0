@@ -40,81 +40,82 @@ const Kitchen = () => {
   const getStatusBadgeClass = (status) => {
     switch (status.toLowerCase()) {
       case "completed":
-        return "bg-green-500 text-white"
+        return "bg-green-100 text-green-700 border border-green-400"
       case "pending":
-        return "bg-yellow-500 text-white"
+        return "bg-yellow-100 text-yellow-700 border border-yellow-400"
       case "processing":
-        return "bg-blue-500 text-white"
+        return "bg-blue-100 text-blue-700 border border-blue-400"
       case "cancelled":
-        return "bg-red-500 text-white"
+        return "bg-red-100 text-red-700 border border-red-400"
       default:
-        return "bg-gray-500 text-white"
+        return "bg-gray-100 text-gray-700 border border-gray-400"
     }
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold text-primary font-open-sans">Kitchen Dashboard</h2>
       </div>
 
-      <div className="bg-surface rounded-xl shadow-lg p-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div>
-            <input
-              type="text"
-              placeholder="Search orders..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-primary font-open-sans"
-            />
-          </div>
-          <div>
-            <select
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-primary font-open-sans"
-            >
-              <option value="all">All Status</option>
-              <option value="completed">Completed</option>
-              <option value="pending">Pending</option>
-              <option value="processing">Processing</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
-          </div>
+      <div className="bg-surface rounded-2xl shadow-xl p-6 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <input
+            type="text"
+            placeholder="Search orders by customer or ID..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-primary font-open-sans"
+          />
+
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-primary font-open-sans"
+          >
+            <option value="all">All Status</option>
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-border">
-            <thead className="bg-hover">
+        <div className="overflow-x-auto rounded-xl border border-border">
+          <table className="min-w-full text-sm text-left table-auto">
+            <thead className="bg-hover text-secondary uppercase text-xs font-semibold tracking-wide">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Order ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Customer</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Item</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Total</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3">#</th>
+                <th className="px-6 py-3">Customer</th>
+                <th className="px-6 py-3">Item</th>
+                <th className="px-6 py-3">Total</th>
+                <th className="px-6 py-3">Status</th>
+                <th className="px-6 py-3">Date</th>
               </tr>
             </thead>
-            <tbody className="bg-surface divide-y divide-border">
+            <tbody className="divide-y divide-border bg-surface text-primary">
               {filteredOrders.length > 0 ? (
                 filteredOrders.map((order, idx) => (
-                  <tr key={idx} className="hover:bg-hover transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-primary">#{idx + 1}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-primary">{order.customer}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-primary">{order.itemName}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-primary">{order.total.toFixed(2)} TK</td>
+                  <tr key={order.id} className="hover:bg-hover transition-all duration-200">
+                    <td className="px-6 py-4 whitespace-nowrap">#{idx + 1}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{order.customer}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{order.itemName}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{order.total.toFixed(2)} TK</td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(order.status)}`}>
+                      <span
+                        className={`px-3 py-1 inline-flex text-xs font-medium rounded-full transition-all duration-300 ${getStatusBadgeClass(
+                          order.status
+                        )}`}
+                      >
                         {order.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-primary">{order.date}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{order.date}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="px-6 py-10 text-center text-gray-500">
+                  <td colSpan={6} className="text-center px-6 py-10 text-gray-500">
                     No orders found
                   </td>
                 </tr>
