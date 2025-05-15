@@ -83,22 +83,43 @@ const Dashboard = () => {
     value: statusCounts[status],
   }))
 
-  // Generate monthly revenue data
-  const monthlyData = orders.reduce((acc, order) => {
-    const date = new Date(order.date)
-    const month = date.toLocaleString("default", { month: "short" })
+  // // Generate monthly revenue data
+  // const monthlyData = orders.reduce((acc, order) => {
+  //   const date = new Date(order.date)
+  //   const month = date.toLocaleString("default", { month: "short" })
 
-    if (!acc[month]) {
-      acc[month] = { name: month, revenue: 0, orders: 0 }
-    }
+  //   if (!acc[month]) {
+  //     acc[month] = { name: month, revenue: 0, orders: 0 }
+  //   }
 
-    acc[month].revenue += order.amount
-    acc[month].orders += 1
+  //   acc[month].revenue += order.amount
+  //   acc[month].orders += 1
 
-    return acc
-  }, {})
+  //   return acc
+  // }, {})
+  // Generate daily revenue data
+  // const revenueData = Object.values(monthlyData)
+  
+const dailyData = orders.reduce((acc, order) => {
+  const date = new Date(order.date)
+  const day = date.toISOString().split("T")[0] // Format: YYYY-MM-DD
 
-  const revenueData = Object.values(monthlyData)
+  if (!acc[day]) {
+    acc[day] = { name: day, revenue: 0, orders: 0 }
+  }
+
+  acc[day].revenue += order.amount
+  acc[day].orders += 1
+
+  return acc
+}, {})
+
+// Sort by date
+const revenueData = Object.values(dailyData).sort((a, b) =>
+  new Date(a.name) - new Date(b.name)
+)
+
+
 
   // Define colors for pie chart
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"]
