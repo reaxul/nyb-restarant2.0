@@ -18,6 +18,7 @@ import Signup from "../pages/Signup";
 import Users from "../pages/Users";
 import PrivateRoute from "./PrivateRoute";
 import ScrollToTop from "../components/ScrollToTop";
+import Kitchen from "../pages/Kitchen";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
         path: "settings",
         element: <Settings />,
       },
+      {
+        path: "kitchen",
+        element: <Kitchen />,
+      }
     ],
   },
 ]);
