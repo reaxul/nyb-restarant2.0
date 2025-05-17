@@ -1,15 +1,28 @@
 import { useParams } from "react-router-dom";
-import { menu } from "../constant/menu";
+import { useGetAllMenuItemsQuery } from "../redux/api/menuApi/menuApi";
 import MenuDetails from "../components/MenuDetails";
 
 const MenuItem = () => {
   const { id } = useParams();
+  const { data, isLoading, isError } = useGetAllMenuItemsQuery();
 
-  // Find the menu item by id
-  const menuItem = menu.reduce((found, category) => {
-    if (found) return found;
-    return category.items.find(item => item.id === parseInt(id));
-  }, null);
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-white">Loading...</p>
+      </div>
+    );
+  }
+
+  if (isError || !data?.items) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-red-500">Failed to load menu items.</p>
+      </div>
+    );
+  }
+
+  const menuItem = data.items.find((item) => item._id === id);
 
   if (!menuItem) {
     return (
@@ -25,4 +38,4 @@ const MenuItem = () => {
   return <MenuDetails item={menuItem} />;
 };
 
-export default MenuItem; 
+export default MenuItem;

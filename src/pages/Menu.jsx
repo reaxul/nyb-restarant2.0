@@ -10,7 +10,7 @@ const Menu = () => {
 
   // Extract and normalize menu items
   const menuItems = data?.items || [];
-console.log(menuItems);
+
   // Filter by category (case-insensitive match)
   const filteredItems = menuItems.filter(
     (item) => item.category?.toUpperCase() === category
