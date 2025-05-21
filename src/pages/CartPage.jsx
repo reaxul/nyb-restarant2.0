@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../redux/features/cartSlice";
-import { Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -21,7 +21,9 @@ const CartPage = () => {
       <h1 className="text-3xl font-bold mb-8 text-center">🛒 Your Cart</h1>
 
       {cartItems.length === 0 ? (
-        <p className="text-gray-400 text-center">Your cart is currently empty.</p>
+        <p className="text-gray-400 text-center">
+          Your cart is currently empty.
+        </p>
       ) : (
         <div className="space-y-6">
           {cartItems.map((item) => (
@@ -49,11 +51,42 @@ const CartPage = () => {
                       className="ml-2 w-16 px-2 py-1 rounded bg-gray-800 text-white border border-gray-600"
                     />
                   </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Subtotal:{" "}
-                    <span className="text-white font-medium">
-                      {item.price * item.quantity} Taka
-                    </span>
+                  <p className="text-sm text-gray-400">
+                    {item.price} Taka ×
+                    <div className="flex items-center gap-2 mt-1">
+                      <button
+                        onClick={() =>
+                          dispatch(
+                            updateQuantity({
+                              id: item._id,
+                              quantity: item.quantity - 1,
+                            })
+                          )
+                        }
+                        disabled={item.quantity <= 1}
+                        className="bg-gray-700 text-white px-2 py-1 rounded hover:bg-gray-600 disabled:opacity-50"
+                      >
+                        <Minus size={16} />
+                      </button>
+
+                      <span className="px-3 text-white font-medium">
+                        {item.quantity}
+                      </span>
+
+                      <button
+                        onClick={() =>
+                          dispatch(
+                            updateQuantity({
+                              id: item._id,
+                              quantity: item.quantity + 1,
+                            })
+                          )
+                        }
+                        className="bg-gray-700 text-white px-2 py-1 rounded hover:bg-gray-600"
+                      >
+                        <Plus size={16} />
+                      </button>
+                    </div>
                   </p>
                 </div>
               </div>
