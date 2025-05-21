@@ -30,8 +30,9 @@ const Navbar = () => {
     { label: "Home", path: "/" },
     { label: "Info", path: "/info" },
     { label: "Menu", path: "/menu" },
-    { label: "About", path: "/about" },
+    // { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
+    { label: "Cart", path: "/cart" },
   ];
 
   const authItems = user

@@ -1,11 +1,36 @@
 const Info = () => {
   return (
-    <section className=" py-12">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-gray-200 mb-6">
+    <div className="py-12 px-4 max-w-7xl mx-auto">
+      {/* About Section */}
+      <section className="text-center mb-16">
+        <h2 className="text-4xl font-bold text-gray-200 mb-6">
           About NYB Restaurant
         </h2>
-        <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
+          At NYB Restaurant, we bring a passion for food and community to the
+          heart of New York. Founded in 2015, our journey began with a simple
+          goal: to create a space where people can enjoy exceptional meals made
+          with the freshest ingredients.
+        </p>
+        <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
+          Our mission is to celebrate the joy of dining by offering a menu that
+          blends classic flavors with modern twists. From our savory dishes to
+          our delightful desserts, every item is crafted with care to ensure a
+          memorable experience for our guests.
+        </p>
+        <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+          We invite you to join us at NYB Restaurant, where every meal is a
+          celebration of taste, tradition, and togetherness. Come savor the
+          flavors that make us who we are!
+        </p>
+      </section>
+
+      {/* Info Section */}
+      <section className="text-center">
+        <h2 className="text-3xl font-bold text-gray-200 mb-6">
+          General Information
+        </h2>
+        <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
           Welcome to NYB Restaurant, where culinary excellence meets warm
           hospitality. Located in the heart of the city, we offer a diverse menu
           featuring delicious food, refreshing drinks, and delightful desserts.
@@ -36,8 +61,8 @@ const Info = () => {
             <p className="text-gray-400">Map: Coming Soon</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

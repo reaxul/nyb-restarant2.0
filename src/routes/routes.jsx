@@ -21,6 +21,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import Kitchen from "../pages/Kitchen";
 import AddMenu from "../pages/AddMenu";
 import ManageMenu from "../pages/ManageMenu";
+import CartPage from "../pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -48,18 +49,22 @@ const router = createBrowserRouter([
         path: "/info",
         element: <Info />,
       },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/menu",
-        element: <Menu />,
-      },
+      // {
+        //   path: "/about",
+        //   element: <About />,
+        // },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+        {
+          path: "/menu",
+          element: <Menu />,
+        },
+        {
+          path: "/cart",
+          element: <CartPage />,
+        },
       {
         path: "/menu/:id",
         element: <MenuItem />,
@@ -121,7 +126,7 @@ const router = createBrowserRouter([
       {
         path: "manage-menu",
         element: <ManageMenu />,
-      }
+      },
     ],
   },
 ]);
