@@ -84,7 +84,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/checkout/:orderId",
+    path: "/checkout",
     element: (
       <PrivateRoute>
         <StripeCheckoutForm />

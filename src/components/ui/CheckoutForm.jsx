@@ -8,13 +8,12 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCreateOrderMutation } from "../../redux/api/ordersApi/ordersApi";
 import { useAppSelector } from "../../hooks/hooks";
 import { useCurrentUser } from "../../redux/features/auth/authSlice";
-import { useGetMenuItemByIdQuery } from "../../redux/api/menuApi/menuApi";
 
 // Load Stripe
 const stripePromise = loadStripe(
@@ -24,17 +23,12 @@ const stripePromise = loadStripe(
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const params = useParams();
-  const itemId = params.orderId;
+  const location = useLocation();
   const navigate = useNavigate();
+  const { items = [], total = 0 } = location.state || {};
+
   const user = useAppSelector(useCurrentUser);
   const [createOrder] = useCreateOrderMutation();
-  const {
-    data,
-    isLoading: itemLoading,
-    error: itemError,
-  } = useGetMenuItemByIdQuery(itemId);
-  const item = data?.item;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -71,7 +65,7 @@ const CheckoutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!stripe || !elements || !item) return;
+    if (!stripe || !elements) return;
     if (!validateForm()) return;
 
     setIsLoading(true);
@@ -95,17 +89,21 @@ const CheckoutForm = () => {
     }
 
     try {
-      const response = await createOrder({
+      await createOrder({
         userId: user?._id,
-        itemName: item.name,
-        itemId: item._id,
-        paymentMethodId: paymentMethod.id,
-        amount: item.price,
+        items: items.map((item) => ({
+          itemId: item._id,
+          itemName: item.name,
+          itemImage: item.image,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        amount: total,
         customerInfo: formData,
+        paymentMethodId: paymentMethod.id,
         status: "pending",
-        itemImage: item.image,
         date: new Date().toISOString(),
-      }).unwrap();
+      });
 
       toast.success("Payment successful! Thank you for your purchase.", {
         theme: "dark",
@@ -115,6 +113,7 @@ const CheckoutForm = () => {
         navigate("/");
       }, 1500);
     } catch (err) {
+      console.error("Order creation error:", err);
       setErrors({ submission: "Payment processing failed. Please try again." });
       toast.error("Payment failed. Please try again.", {
         theme: "dark",
@@ -123,14 +122,6 @@ const CheckoutForm = () => {
       setIsLoading(false);
     }
   };
-
-  if (itemLoading) return <div className="text-white p-6">Loading item...</div>;
-  if (itemError || !item)
-    return (
-      <div className="text-red-400 p-6">
-        Error loading item or item not found.
-      </div>
-    );
 
   return (
     <div className="min-h-screen bg-gray-900 py-12 text-gray-200">
@@ -230,15 +221,22 @@ const CheckoutForm = () => {
                   Order Summary
                 </h3>
                 <div className="bg-gray-700 p-4 rounded-md border border-gray-600">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-gray-300">Item Name</span>
-                    <span className="font-medium text-white">{item?.name}</span>
+                  <div className="text-sm space-y-1 text-white">
+                    {items.map((item) => (
+                      <div
+                        key={item._id}
+                        className="flex justify-between items-center"
+                      >
+                        <span>
+                          {item.name} x {item.quantity}
+                        </span>
+                        <span>{item.price * item.quantity} Taka</span>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mt-3 border-t border-gray-500 pt-2">
                     <span className="text-gray-300">Total</span>
-                    <span className="font-medium text-white">
-                      {item?.price} Taka
-                    </span>
+                    <span className="font-medium text-white">{total} Taka</span>
                   </div>
                 </div>
               </div>
