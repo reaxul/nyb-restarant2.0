@@ -19,25 +19,19 @@ const FoodCard = ({ item }) => {
         !isAvailable ? "pointer-events-none" : ""
       }`}
     >
-      <Link
-        to={isAvailable ? `/menu/${item._id}` : "#"}
-        className="relative block overflow-hidden"
-        tabIndex={isAvailable ? 0 : -1}
-      >
-        <img
-          loading="lazy"
-          src={item.image}
-          alt={item.name}
-          className={`w-full h-64 object-cover transition-transform duration-300 ${
-            isAvailable ? "hover:scale-105" : "brightness-50 blur-sm"
-          }`}
-        />
-        {!isAvailable && (
-          <div className="absolute inset-0 flex items-center justify-center text-white font-bold bg-black bg-opacity-60 text-lg">
-            Not Available Right Now
-          </div>
-        )}
-      </Link>
+      <img
+        loading="lazy"
+        src={item.image}
+        alt={item.name}
+        className={`w-full h-64 object-cover transition-transform duration-300 ${
+          isAvailable ? "hover:scale-105" : "brightness-50 blur-sm"
+        }`}
+      />
+      {!isAvailable && (
+        <div className="absolute inset-0 flex items-center justify-center text-white font-bold bg-black bg-opacity-60 text-lg">
+          Not Available Right Now
+        </div>
+      )}
 
       <div className={`p-4 ${!isAvailable ? "opacity-60" : ""}`}>
         <div className="flex justify-between items-center mb-2">
