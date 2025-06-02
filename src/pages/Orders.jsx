@@ -202,7 +202,7 @@ const Orders = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
+            {/* <div className="grid grid-cols-1 gap-4">
               <div>
                 <p className="text-secondary">Shipping Address</p>
                 <p className="text-primary font-semibold">
@@ -213,7 +213,7 @@ const Orders = () => {
                   {originalData.customerInfo.country}
                 </p>
               </div>
-            </div>
+            </div> */}
 
             <div className="border-t border-border pt-4">
               <h4 className="text-lg font-semibold text-primary mb-2">

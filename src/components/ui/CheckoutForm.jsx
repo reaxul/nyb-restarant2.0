@@ -33,11 +33,11 @@ const CheckoutForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-    country: "US",
+    // address: "",
+    // city: "",
+    // state: "",
+    // zip: "",
+    // country: "US",
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -53,10 +53,10 @@ const CheckoutForm = () => {
     if (!formData.email.trim()) newErrors.email = "Email is required";
     if (!/^\S+@\S+\.\S+$/.test(formData.email))
       newErrors.email = "Email is invalid";
-    if (!formData.address.trim()) newErrors.address = "Address is required";
-    if (!formData.city.trim()) newErrors.city = "City is required";
-    if (!formData.state.trim()) newErrors.state = "State is required";
-    if (!formData.zip.trim()) newErrors.zip = "ZIP code is required";
+    // if (!formData.address.trim()) newErrors.address = "Address is required";
+    // if (!formData.city.trim()) newErrors.city = "City is required";
+    // if (!formData.state.trim()) newErrors.state = "State is required";
+    // if (!formData.zip.trim()) newErrors.zip = "ZIP code is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -124,167 +124,147 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 py-12 text-gray-200">
-      <ToastContainer />
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
-          <div className="px-6 py-4 bg-gray-900 text-white border-b border-gray-700">
-            <h2 className="text-xl font-semibold">Complete Your Purchase</h2>
+   <div className="min-h-screen bg-gray-900 py-12 text-gray-200">
+  <ToastContainer />
+  <div className="max-w-4xl mx-auto px-4">
+    <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
+      <div className="px-6 py-4 bg-gray-900 text-white border-b border-gray-700">
+        <h2 className="text-xl font-semibold">Complete Your Purchase</h2>
+      </div>
+
+      <form onSubmit={handleSubmit} className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Customer Info */}
+          <div className="md:col-span-2">
+            <h3 className="text-lg font-medium mb-4 text-gray-200">
+              Customer Information
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {["name", "email"].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-300 capitalize">
+                    {field}
+                  </label>
+                  <input
+                    type={field === "email" ? "email" : "text"}
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleInputChange}
+                    className={`mt-1 block w-full border ${
+                      errors[field] ? "border-red-500" : "border-gray-600"
+                    } rounded-md py-2 px-3 bg-gray-700 text-white placeholder-gray-400`}
+                  />
+                  {errors[field] && (
+                    <p className="text-sm text-red-400">{errors[field]}</p>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Customer Info */}
-              <div className="md:col-span-2">
-                <h3 className="text-lg font-medium mb-4 text-gray-200">
-                  Customer Information
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {["name", "email"].map((field) => (
-                    <div key={field}>
-                      <label className="block text-sm font-medium text-gray-300 capitalize">
-                        {field}
-                      </label>
-                      <input
-                        type={field === "email" ? "email" : "text"}
-                        name={field}
-                        value={formData[field]}
-                        onChange={handleInputChange}
-                        className={`mt-1 block w-full border ${
-                          errors[field] ? "border-red-500" : "border-gray-600"
-                        } rounded-md py-2 px-3 bg-gray-700 text-white placeholder-gray-400`}
-                      />
-                      {errors[field] && (
-                        <p className="text-sm text-red-400">{errors[field]}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Takeaway Note */}
+          <div className="md:col-span-2">
+            <p className="bg-yellow-800 bg-opacity-30 border-l-4 border-yellow-500 text-yellow-200 p-4 rounded">
+              <strong>Note:</strong> We currently only offer <strong>Takeaway</strong>. No delivery options are available.
+            </p>
+          </div>
 
-              {/* Address Info */}
-              <div className="md:col-span-2">
-                <h3 className="text-lg font-medium mb-4 text-gray-200">
-                  Shipping Address
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {["address", "city", "state", "zip"].map((field) => (
-                    <div key={field}>
-                      <label className="block text-sm font-medium text-gray-300 capitalize">
-                        {field}
-                      </label>
-                      <input
-                        type="text"
-                        name={field}
-                        value={formData[field]}
-                        onChange={handleInputChange}
-                        className={`mt-1 block w-full border ${
-                          errors[field] ? "border-red-500" : "border-gray-600"
-                        } rounded-md py-2 px-3 bg-gray-700 text-white placeholder-gray-400`}
-                      />
-                      {errors[field] && (
-                        <p className="text-sm text-red-400">{errors[field]}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Card Info */}
-              <div className="md:col-span-2">
-                <h3 className="text-lg font-medium mb-4 text-gray-200">
-                  Payment Information
-                </h3>
-                <div className="border border-gray-600 rounded-md p-4 bg-gray-700">
-                  <CardElement
-                    options={{
-                      style: {
-                        base: {
-                          fontSize: "16px",
-                          color: "#FFFFFF",
-                          "::placeholder": { color: "#9CA3AF" },
-                          iconColor: "#FFFFFF",
-                        },
-                        invalid: { color: "#F87171" },
-                      },
-                    }}
-                  />
-                  {errors.card && (
-                    <p className="mt-2 text-sm text-red-400">{errors.card}</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Summary */}
-              <div className="md:col-span-2">
-                <h3 className="text-lg font-medium mb-4 text-gray-200">
-                  Order Summary
-                </h3>
-                <div className="bg-gray-700 p-4 rounded-md border border-gray-600">
-                  <div className="text-sm space-y-1 text-white">
-                    {items.map((item) => (
-                      <div
-                        key={item._id}
-                        className="flex justify-between items-center"
-                      >
-                        <span>
-                          {item.name} x {item.quantity}
-                        </span>
-                        <span>{item.price * item.quantity} Taka</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex justify-between mt-3 border-t border-gray-500 pt-2">
-                    <span className="text-gray-300">Total</span>
-                    <span className="font-medium text-white">{total} Taka</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Submission Error */}
-              {errors.submission && (
-                <div className="md:col-span-2">
-                  <p className="text-sm text-red-400 bg-red-900 bg-opacity-30 p-3 rounded border border-red-800">
-                    {errors.submission}
-                  </p>
-                </div>
+          {/* Card Info */}
+          <div className="md:col-span-2">
+            <h3 className="text-lg font-medium mb-4 text-gray-200">
+              Payment Information
+            </h3>
+            <div className="border border-gray-600 rounded-md p-4 bg-gray-700">
+              <CardElement
+                options={{
+                  style: {
+                    base: {
+                      fontSize: "16px",
+                      color: "#FFFFFF",
+                      "::placeholder": { color: "#9CA3AF" },
+                      iconColor: "#FFFFFF",
+                    },
+                    invalid: { color: "#F87171" },
+                  },
+                }}
+              />
+              {errors.card && (
+                <p className="mt-2 text-sm text-red-400">{errors.card}</p>
               )}
+            </div>
+          </div>
 
-              {/* Submit Button */}
-              <div className="md:col-span-2 mt-4">
-                <button
-                  type="submit"
-                  disabled={isLoading || !stripe}
-                  className="w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  {isLoading ? (
-                    <span className="flex items-center justify-center">
-                      <svg
-                        className="animate-spin h-5 w-5 mr-3"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        />
-                        <path d="M4 12a8 8 0 018-8v8H4z" fill="currentColor" />
-                      </svg>
-                      Processing...
+          {/* Order Summary */}
+          <div className="md:col-span-2">
+            <h3 className="text-lg font-medium mb-4 text-gray-200">
+              Order Summary
+            </h3>
+            <div className="bg-gray-700 p-4 rounded-md border border-gray-600">
+              <div className="text-sm space-y-1 text-white">
+                {items.map((item) => (
+                  <div
+                    key={item._id}
+                    className="flex justify-between items-center"
+                  >
+                    <span>
+                      {item.name} x {item.quantity}
                     </span>
-                  ) : (
-                    "Complete Purchase"
-                  )}
-                </button>
+                    <span>{item.price * item.quantity} Taka</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-between mt-3 border-t border-gray-500 pt-2">
+                <span className="text-gray-300">Total</span>
+                <span className="font-medium text-white">{total} Taka</span>
               </div>
             </div>
-          </form>
+          </div>
+
+          {/* Submission Error */}
+          {errors.submission && (
+            <div className="md:col-span-2">
+              <p className="text-sm text-red-400 bg-red-900 bg-opacity-30 p-3 rounded border border-red-800">
+                {errors.submission}
+              </p>
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <div className="md:col-span-2 mt-4">
+            <button
+              type="submit"
+              disabled={isLoading || !stripe}
+              className="w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {isLoading ? (
+                <span className="flex items-center justify-center">
+                  <svg
+                    className="animate-spin h-5 w-5 mr-3"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path d="M4 12a8 8 0 018-8v8H4z" fill="currentColor" />
+                  </svg>
+                  Processing...
+                </span>
+              ) : (
+                "Complete Purchase"
+              )}
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
+  </div>
+</div>
+
   );
 };
 
