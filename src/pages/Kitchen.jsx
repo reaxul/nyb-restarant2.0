@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 "use client"
 
 import { useState } from "react"
@@ -14,16 +13,20 @@ const Kitchen = () => {
 
   const orders = orderData
     ? orderData.orders
-        .map((order) => ({
-          id: order._id,
-          customer: order.customerInfo.name,
-          total: order.amount,
-          status: order.status,
-          date: new Date(order.date).toLocaleDateString(),
-          orderDate: new Date(order.date),
-          itemName: order.itemName,
-          itemImage: order.itemImage,
-        }))
+        .flatMap((order) =>
+          order.items.map((item) => ({
+            id: order._id,
+            customer: order.customerInfo.name,
+            total: order.amount,
+            status: order.status,
+            date: new Date(order.date).toLocaleDateString(),
+            orderDate: new Date(order.date),
+            itemName: item.itemName,
+            itemImage: item.itemImage,
+            quantity: item.quantity,
+            itemPrice: item.price,
+          }))
+        )
         .sort((a, b) => b.orderDate - a.orderDate)
     : []
 
@@ -88,7 +91,9 @@ const Kitchen = () => {
                 <th className="px-6 py-3">#</th>
                 <th className="px-6 py-3">Customer</th>
                 <th className="px-6 py-3">Item</th>
-                <th className="px-6 py-3">Total</th>
+                <th className="px-6 py-3">Qty</th>
+                <th className="px-6 py-3">Item Price</th>
+                {/* <th className="px-6 py-3">Order Total</th> */}
                 <th className="px-6 py-3">Status</th>
                 <th className="px-6 py-3">Date</th>
               </tr>
@@ -96,11 +101,13 @@ const Kitchen = () => {
             <tbody className="divide-y divide-border bg-surface text-primary">
               {filteredOrders.length > 0 ? (
                 filteredOrders.map((order, idx) => (
-                  <tr key={order.id} className="hover:bg-hover transition-all duration-200">
+                  <tr key={`${order.id}-${idx}`} className="hover:bg-hover transition-all duration-200">
                     <td className="px-6 py-4 whitespace-nowrap">#{idx + 1}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{order.customer}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{order.itemName}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{order.total.toFixed(2)} TK</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{order.quantity}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{order.itemPrice.toFixed(2)} TK</td>
+                    {/* <td className="px-6 py-4 whitespace-nowrap">{order.total.toFixed(2)} TK</td> */}
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
                         className={`px-3 py-1 inline-flex text-xs font-medium rounded-full transition-all duration-300 ${getStatusBadgeClass(
@@ -115,7 +122,7 @@ const Kitchen = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="text-center px-6 py-10 text-gray-500">
+                  <td colSpan={8} className="text-center px-6 py-10 text-gray-500">
                     No orders found
                   </td>
                 </tr>
