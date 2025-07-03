@@ -3,10 +3,10 @@ const About = () => {
     <section className=" py-16">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold text-gray-200 mb-6">
-          About NYB Restaurant
+          About Smart Dine
         </h2>
         <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-          At NYB Restaurant, we bring a passion for food and community to the
+          At Smart Dine, we bring a passion for food and community to the
           heart of New York. Founded in 2015, our journey began with a simple
           goal: to create a space where people can enjoy exceptional meals made
           with the freshest ingredients.
@@ -18,7 +18,7 @@ const About = () => {
           memorable experience for our guests.
         </p>
         <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-          We invite you to join us at NYB Restaurant, where every meal is a
+          We invite you to join us at Smart Dine, where every meal is a
           celebration of taste, tradition, and togetherness. Come savor the
           flavors that make us who we are!
         </p>

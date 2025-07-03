@@ -258,9 +258,44 @@ const MyProfile = () => {
           <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
-                <h2 className="text-sm text-gray-400 uppercase">Full Name</h2>
-                <p className="text-xl">{user.name || "Not provided"}</p>
+                <h2 className="text-sm text-gray-400 uppercase mb-1">
+                  Full Name
+                </h2>
+                <div className="flex items-center gap-2 relative group w-fit">
+                  <span className="text-xl">{user.name || "Not provided"}</span>
+
+                  {/* Active Status Dot */}
+                  <span
+                    className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"
+                    title="Active now"
+                  ></span>
+
+                  {/* Tooltip with question mark */}
+                  <span className="relative flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4 text-gray-400 cursor-pointer"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8.227 9a3 3 0 015.546 0c0 1.5-2.25 2.25-2.25 2.25M12 17h.01M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+                      />
+                    </svg>
+
+                    {/* Tooltip content */}
+                    <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-gray-800 text-gray-100 text-xs px-3 py-2 rounded-lg shadow-lg w-60 hidden group-hover:block z-50">
+                      Account will be marked inactive after 30 days of
+                      inactivity.
+                    </div>
+                  </span>
+                </div>
               </div>
+
               <div>
                 <h2 className="text-sm text-gray-400 uppercase">Email</h2>
                 <p className="text-xl">{user.email}</p>

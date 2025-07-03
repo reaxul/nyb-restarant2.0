@@ -43,7 +43,7 @@ const Navbar = () => {
       ]
     : [
         { label: "Login", path: "/login" },
-        { label: "Sign Up", path: "/signup" },
+        // { label: "Sign Up", path: "/signup" },
       ];
 
   return (

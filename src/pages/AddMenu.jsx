@@ -118,6 +118,7 @@ const AddMenu = () => {
             <option value="Food">Food</option>
             <option value="Drinks">Drinks</option>
             <option value="Desserts">Desserts</option>
+            <option value="Chef's Special">Chef's Special</option>
           </select>
         </div>
 

@@ -4,10 +4,10 @@ const Info = () => {
       {/* About Section */}
       <section className="text-center mb-16">
         <h2 className="text-4xl font-bold text-gray-200 mb-6">
-          About NYB Restaurant
+          About Smart Dine
         </h2>
         <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-          At NYB Restaurant, we bring a passion for food and community to the
+          At Smart Dine, we bring a passion for food and community to the
           heart of New York. Founded in 2015, our journey began with a simple
           goal: to create a space where people can enjoy exceptional meals made
           with the freshest ingredients.
@@ -19,7 +19,7 @@ const Info = () => {
           memorable experience for our guests.
         </p>
         <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-          We invite you to join us at NYB Restaurant, where every meal is a
+          We invite you to join us at Smart Dine, where every meal is a
           celebration of taste, tradition, and togetherness. Come savor the
           flavors that make us who we are!
         </p>
@@ -31,7 +31,7 @@ const Info = () => {
           General Information
         </h2>
         <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
-          Welcome to NYB Restaurant, where culinary excellence meets warm
+          Welcome to Smart Dine, where culinary excellence meets warm
           hospitality. Located in the heart of the city, we offer a diverse menu
           featuring delicious food, refreshing drinks, and delightful desserts.
           Join us for an unforgettable dining experience!

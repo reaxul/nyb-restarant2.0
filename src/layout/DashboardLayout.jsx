@@ -87,7 +87,7 @@ const DashboardLayout = () => {
           {/* Logo and Toggle */}
           <div className="flex items-center justify-between p-4 border-b border-border">
             <Link to="/" className="text-2xl font-bold text-primary">
-              NYB
+              Smart Dine
             </Link>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -119,7 +119,7 @@ const DashboardLayout = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-primary">
-                  {user?.email?.split("@")[0] || "User"}
+                  {/* {user?.email?.split("@")[0] || "User"} */}Manager
                 </p>
                 <p className="text-xs text-secondary">{user?.role || "User"}</p>
               </div>

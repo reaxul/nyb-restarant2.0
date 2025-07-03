@@ -63,7 +63,7 @@ const FoodCard = ({ item }) => {
         {item.type && (
           <div
             className={`mt-2 text-sm font-medium ${
-              item.type.toLowerCase() === "vegetarian"
+              ["vegetarian", "caffeine free"].includes(item.type.toLowerCase())
                 ? "text-green-400"
                 : "text-red-400"
             }`}

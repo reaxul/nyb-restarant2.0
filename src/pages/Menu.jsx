@@ -6,7 +6,7 @@ const Menu = () => {
   const [category, setCategory] = useState("FOOD");
   const { data, isLoading, isError, error } = useGetAllMenuItemsQuery();
 
-  const categories = ["FOOD", "DRINKS", "DESSERTS"];
+  const categories = ["FOOD", "DRINKS", "DESSERTS", "CHEF'S SPECIAL"];
 
   // Extract and normalize menu items
   const menuItems = data?.items || [];
@@ -43,17 +43,13 @@ const Menu = () => {
 
       {/* Filtered Items Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-        {!isLoading && filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
-            <FoodCard key={item._id} item={item} />
-          ))
-        ) : (
-          !isLoading && (
-            <p className="text-gray-500 col-span-full">
-              No items found in the {category.toLowerCase()} category.
-            </p>
-          )
-        )}
+        {!isLoading && filteredItems.length > 0
+          ? filteredItems.map((item) => <FoodCard key={item._id} item={item} />)
+          : !isLoading && (
+              <p className="text-gray-500 col-span-full">
+                No items found in the {category.toLowerCase()} category.
+              </p>
+            )}
       </div>
     </div>
   );

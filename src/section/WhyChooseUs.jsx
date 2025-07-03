@@ -2,7 +2,7 @@ const WhyChooseUs = () => {
     return (
       <section className="bg-primary/5 dark:bg-gray-900 py-10 px-6 text-center">
         <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-          Why Choose NYB?
+          Why Choose Smart Dine?
         </h2>
         <div className="flex flex-col md:flex-row justify-center gap-6">
           {["Fresh Ingredients", "Authentic Recipes", "Great Atmosphere"].map(

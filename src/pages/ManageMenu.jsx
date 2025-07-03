@@ -13,7 +13,8 @@ const ManageMenu = () => {
   const [deleteMenuItem] = useDeleteMenuItemMutation();
   const [updateMenuItem] = useUpdateMenuItemMutation();
 
-  const categories = ["FOOD", "DRINKS", "DESSERTS"];
+  const categories = ["FOOD", "DRINKS", "DESSERTS", "CHEF'S SPECIAL"];
+
   const menuItems = data?.items || [];
   const filteredItems = menuItems.filter(
     (item) => item.category?.toUpperCase() === category
@@ -89,23 +90,23 @@ const ManageMenu = () => {
 
             {/* Action Buttons */}
             <div className="flex gap-2 pt-3">
-              <button
+              {/* <button
                 onClick={() => handleEdit(item)}
                 className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600"
               >
                 Edit
+              </button> */}
+              <button
+                onClick={() => handleToggleStatus(item)}
+                className="px-3 py-1 bg-emerald-500 text-white text-sm rounded-md hover:bg-yellow-600"
+              >
+                Toggle Status
               </button>
               <button
                 onClick={() => setItemToDelete(item)} // open modal instead of direct delete
                 className="px-3 py-1 bg-red-500 text-white text-sm rounded-md hover:bg-red-600"
               >
                 Delete
-              </button>
-              <button
-                onClick={() => handleToggleStatus(item)}
-                className="px-3 py-1 bg-yellow-500 text-white text-sm rounded-md hover:bg-yellow-600"
-              >
-                Toggle Status
               </button>
             </div>
           </div>

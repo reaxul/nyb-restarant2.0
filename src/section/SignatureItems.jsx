@@ -40,9 +40,7 @@ const SignatureItems = () => {
         <h2 className="text-3xl font-bold mb-12 tracking-tight">Our Signature Items</h2>
         <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2">
           {signatureItems.map((item) => (
-            <Link
-              to={`/menu/${item.id}`}
-              key={item.id}
+            <div
               className="group relative rounded-xl overflow-hidden border border-white/10 hover:scale-105 transition-transform duration-300 shadow-md"
             >
               <div className="relative h-56 overflow-hidden">
@@ -57,7 +55,7 @@ const SignatureItems = () => {
                 <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
                 <p className="text-sm text-gray-300">{item.description}</p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
