@@ -35,15 +35,14 @@ const FoodCard = ({ item }) => {
 
       <div className={`p-4 ${!isAvailable ? "opacity-60" : ""}`}>
         <div className="flex justify-between items-center mb-2">
-          <Link
-            to={isAvailable ? `/menu/${item._id}` : "#"}
+          <div
             className={`cursor-pointer hover:underline ${
               !isAvailable ? "pointer-events-none" : ""
             }`}
             tabIndex={isAvailable ? 0 : -1}
           >
             <h2 className="text-xl font-semibold">{item.name}</h2>
-          </Link>
+          </div>
 
           {isAvailable && (
             <button
